@@ -21,7 +21,8 @@ def start(update: Update, _):
 
 def echo(update: Update, _):
     text = update.message.text
-    answer = detect_intent_texts(texts=(text,))
+    session_id = update.message.from_user.id
+    answer = detect_intent_texts(session_id=session_id, text=text)
 
     update.message.reply_text(answer)
 
