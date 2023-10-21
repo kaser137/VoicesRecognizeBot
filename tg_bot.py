@@ -3,6 +3,7 @@ import logging
 from environs import Env
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from dialog import detect_intent_texts
 
 env = Env()
 env.read_env()
@@ -19,7 +20,10 @@ def start(update: Update, _):
 
 
 def echo(update: Update, _):
-    update.message.reply_text(update.message.text)
+    text = update.message.text
+    answer = detect_intent_texts(texts=(text,))
+
+    update.message.reply_text(answer)
 
 
 start_handler = CommandHandler('start', start)
