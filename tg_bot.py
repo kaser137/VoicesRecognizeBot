@@ -19,18 +19,17 @@ def start(update: Update, _):
     update.message.reply_text('Здравствуйте')
 
 
-def echo(update: Update, _):
+def answer(update: Update, _):
     text = update.message.text
     session_id = update.message.from_user.id
     answer = detect_intent_texts(session_id=session_id, text=text)
-
     update.message.reply_text(answer)
 
 
 start_handler = CommandHandler('start', start)
-echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
+answer_handler = MessageHandler(Filters.text & (~Filters.command), answer)
 dispatcher.add_handler(start_handler)
-dispatcher.add_handler(echo_handler)
+dispatcher.add_handler(answer_handler)
 
 
 updater.start_polling()
