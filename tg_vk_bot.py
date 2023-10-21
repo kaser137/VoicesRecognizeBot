@@ -22,19 +22,20 @@ def start(update: Update, _):
 def answer(update: Update, _):
     text = update.message.text
     session_id = update.message.from_user.id
-    answer = detect_intent_texts(session_id=session_id, text=text)
+    answer, _ = detect_intent_texts(session_id=session_id, text=text)
     update.message.reply_text(answer)
 
 
 def reply(event, vk_api):
     text = event.text
     session_id = event.chat_id
-    message = detect_intent_texts(session_id=session_id, text=text)
-    vk_api.messages.send(
-        chat_id=event.chat_id,
-        message=message,
-        random_id=random.randint(1, 1000)
-    )
+    message, is_fallback = detect_intent_texts(session_id=session_id, text=text)
+    if not is_fallback:
+        vk_api.messages.send(
+            chat_id=event.chat_id,
+            message=message,
+            random_id=random.randint(1, 1000)
+        )
 
 
 if __name__ == "__main__":
@@ -55,5 +56,3 @@ if __name__ == "__main__":
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             reply(event, vk_api)
-
-

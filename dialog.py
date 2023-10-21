@@ -9,4 +9,4 @@ def detect_intent_texts(project_id='voisesrecognize', session_id='123456789', te
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    return response.query_result.fulfillment_text
+    return response.query_result.fulfillment_text, response.query_result.intent.is_fallback
