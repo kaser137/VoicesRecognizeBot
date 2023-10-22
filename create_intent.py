@@ -8,7 +8,6 @@ def create_intent(display_name, training_phrases_parts, message_texts, project_i
     training_phrases = []
     for training_phrases_part in training_phrases_parts:
         part = dialogflow.Intent.TrainingPhrase.Part(text=training_phrases_part)
-        # Here we create a new training phrase for each provided part.
         training_phrase = dialogflow.Intent.TrainingPhrase(parts=[part])
         training_phrases.append(training_phrase)
 
@@ -32,7 +31,8 @@ with open('questions.json', "r") as my_file:
 queries = json.loads(queries_json)
 
 for query in queries:
-    # print(query)
-    # print(queries[query]['questions'])
-    # print([queries[query]['answer'],])
-    create_intent(display_name=query, training_phrases_parts=queries[query]['questions'], message_texts=[queries[query]['answer'],])
+    create_intent(
+        display_name=query,
+        training_phrases_parts=queries[query]['questions'],
+        message_texts=[queries[query]['answer'],]
+    )
