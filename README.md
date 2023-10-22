@@ -34,5 +34,5 @@ python3 tg_vk_bot.py
 ```
 
 7. Примеры рабочих ботов:
-Телеграм: https://t.me/VoicesRecognizeBot
-ВК: https://vk.me/join/AJQ1d4B1FSp5TUCFT4WmQyFW
+* Телеграм: https://t.me/VoicesRecognizeBot
+* ВК: https://vk.me/join/AJQ1d4B1FSp5TUCFT4WmQyFW
