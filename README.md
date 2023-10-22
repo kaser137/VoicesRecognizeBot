@@ -38,4 +38,4 @@ python3 tg_vk_bot.py
 * ВК: https://vk.me/join/AJQ1d4B1FSp5TUCFT4WmQyFW
 
 Видео работы бота ВК:
-![](../video.gif)
+![](video.gif)
