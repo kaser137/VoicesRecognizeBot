@@ -41,5 +41,8 @@ python3 tg_vk_bot.py
 
 
 
-https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/a637f0e1-8bb1-46e6-b142-6492cd73e2ba
+
+https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/0c0f635e-2829-4afa-9f19-afb50a54b3fe
+
+
 
