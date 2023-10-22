@@ -1,5 +1,8 @@
 # VoicesRecognize
 
+![111](https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/6f9b1f9c-e8f4-42d5-8359-c236d093626f)
+
+
 ## Цели проекта
 Создать бот для Телеграма и для ВК, которые будут взаимодействовать с Google Dialogflow
 
