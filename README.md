@@ -39,4 +39,7 @@ python3 tg_vk_bot.py
 
 Видео работы бота ВК:
 
-![](video.gif)
+
+
+https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/a637f0e1-8bb1-46e6-b142-6492cd73e2ba
+
