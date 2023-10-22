@@ -22,8 +22,7 @@ pip install -r requirements.txt
 ```
 
 5. Создать файл `.env` в рабочей директории.
-Описание содержимого:
-`
+
 * TG_BOT_TOKEN = Токен для доступа и управления ботом в Телеграм
 * TG_CHAT_ID = Ваш ID в Телеграм
 * GOOGLE_APPLICATION_CREDENTIALS = полный путь к файлу с идентификационными данными [credentials.json](https://cloud.google.com/dialogflow/es/docs/quick/setup#sdk)
