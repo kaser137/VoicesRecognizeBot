@@ -1,12 +1,12 @@
 # VoicesRecognize
 
 ## Цели проекта
-Создать бот для Телеграма и для ВК, которые будут взаимодействовать с Google Dialogflow
+Создать бот для Телеграма и для ВК, которые будут взаимодействовать с [Google](https://www.google.com/) [Dialogflow](https://dialogflow.cloud.google.com/)
 
 ## Как установить и запустить проект
 
 1. Склонировать репозиторий.
-2. Создать виртуальное окружение.
+2. Создать виртуальное окружение в директории проекта.
 ```bash
 python -m venv env
 ```
@@ -27,13 +27,49 @@ pip install -r requirements.txt
 * TG_CHAT_ID = Ваш ID в Телеграм
 * GOOGLE_APPLICATION_CREDENTIALS = полный путь к файлу с идентификационными данными [credentials.json](https://cloud.google.com/dialogflow/es/docs/quick/setup#sdk)
 * VK_TOKEN = Токен для доступа и управления ботом в ВК
+* DIALOGFLOW_PROJECT_ID = id Google проекта в DialogFlow
+* LANGUAGE_CODE = код языка на котором будут отвечать боты (по умолчанию - русский) 
 
-6. Запустить программу:
+6. Запустить программу:  
+телеграм-бот:
 ```bash
-python3 tg_vk_bot.py
+python3 tg_bot.py
+```
+вк-бот:
+```bash
+python3 vk_bot.py
+```
+оба бота:
+```bash
+python3 both_bots.py
 ```
 
-7. Примеры рабочих ботов:
+7. Для тренировки программы DialogFlow и создания intents (смыслов разговора):
+```bash
+python3 create_intent.py --intent full_path
+```
+где full_path полный путь (с названием) к json файлу с данными intents, которые нужно создать
+(по умолчанию прописан файл в репозитории questions.json)  
+пример содержания файла:
+```json
+{
+  "Погода": {
+    "questions": [
+      "Какая погода?",
+      "Солнечно?",
+      "Терло?",
+      "Холодно",
+      "Сухо?",
+      "Осадки?",
+      "Что одеть"
+    ],
+    "answer": "Для погодных условий обратитесь на сайт https://www.wunderground.com"
+  }
+}
+```
+
+
+8. Примеры рабочих ботов:
 * Телеграм: https://t.me/VoicesRecognizeBot
 * ВК: https://vk.me/join/AJQ1d4B1FSp5TUCFT4WmQyFW
 
