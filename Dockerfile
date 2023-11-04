@@ -10,5 +10,5 @@ RUN pip install -r /bots/requirements.txt
 
 COPY . /bots
 
-CMD ["python", "tg_vk_bot.py"]
+CMD ["python", "both_bots.py"]
 

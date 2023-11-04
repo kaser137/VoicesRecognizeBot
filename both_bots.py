@@ -1,4 +1,11 @@
-import os
+import vk_bot
+import tg_bot
 
 
-os.system('python vk_bot.py & python tg_bot.py')
+tg_bot.main()
+vk_bot.main()
+
+
+
+
+

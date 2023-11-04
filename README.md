@@ -1,12 +1,12 @@
 # VoicesRecognize
 
 ## Цели проекта
-Создать бот для Телеграма и для ВК, которые будут взаимодействовать с [Google](https://www.google.com/) [Dialogflow](https://dialogflow.cloud.google.com/)
+Создать бот для Телеграма и для ВК, которые будут взаимодействовать с [Google](https://www.google.com/) [Dialogflow.](https://dialogflow.cloud.google.com/)
 
 ## Как установить и запустить проект
 
 1. Склонировать репозиторий.
-2. Создать виртуальное окружение в директории проекта.
+2. Создать виртуальное окружение в директории проекта:
 ```bash
 python -m venv env
 ```
@@ -21,7 +21,7 @@ python -m venv env
 pip install -r requirements.txt
 ```
 
-5. Создать файл `.env` в рабочей директории.
+5. Создать файл `.env` в рабочей директории
 
 * TG_BOT_TOKEN = Токен для доступа и управления ботом в Телеграм
 * TG_CHAT_ID = Ваш ID в Телеграм
@@ -57,11 +57,8 @@ python3 create_intent.py --intent full_path
     "questions": [
       "Какая погода?",
       "Солнечно?",
-      "Терло?",
-      "Холодно",
-      "Сухо?",
-      "Осадки?",
-      "Что одеть"
+      "Холодно?",
+      "Что одеть?"
     ],
     "answer": "Для погодных условий обратитесь на сайт https://www.wunderground.com"
   }
@@ -77,8 +74,6 @@ python3 create_intent.py --intent full_path
 
 
 
-
-https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/0c0f635e-2829-4afa-9f19-afb50a54b3fe
 
 
 
