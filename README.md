@@ -74,6 +74,10 @@ python3 create_intent.py --intent full_path
 Видео работы бота ВК:
 
 
+https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/1a7f004c-2376-4a19-9cdd-9973f0e5b1c0
+
+
+
 
 
 
