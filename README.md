@@ -1,7 +1,7 @@
 # VoicesRecognize
 
 ## Цели проекта
-Создать бот для Телеграма и для ВК, которые будут взаимодействовать с [Google](https://www.google.com/) [Dialogflow.](https://dialogflow.cloud.google.com/)
+Создать бот для Телеграма и для ВК, которые будут взаимодействовать с [Google](https://www.google.com/) [DialogFlow.](https://dialogflow.cloud.google.com/)
 
 ## Как установить и запустить проект
 
@@ -31,6 +31,7 @@ pip install -r requirements.txt
 * LANGUAGE_CODE = код языка на котором будут отвечать боты (по умолчанию - русский) 
 
 6. Запустить программу:  
+
 телеграм-бот:
 ```bash
 python3 tg_bot.py
@@ -49,7 +50,7 @@ python3 both_bots.py
 python3 create_intent.py --intent full_path
 ```
 где full_path полный путь (с названием) к json файлу с данными intents, которые нужно создать
-(по умолчанию прописан файл в репозитории questions.json)  
+(по умолчанию прописан файл в репозитории questions.json).  
 пример содержания файла:
 ```json
 {
