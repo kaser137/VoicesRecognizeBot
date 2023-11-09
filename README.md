@@ -40,10 +40,6 @@ python3 tg_bot.py
 ```bash
 python3 vk_bot.py
 ```
-оба бота:
-```bash
-python3 both_bots.py
-```
 
 7. Для тренировки программы DialogFlow и создания intents (смыслов разговора):
 ```bash
