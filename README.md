@@ -40,10 +40,6 @@ python3 tg_bot.py
 ```bash
 python3 vk_bot.py
 ```
-оба бота:
-```bash
-python3 both_bots.py
-```
 
 7. Для тренировки программы DialogFlow и создания intents (смыслов разговора):
 ```bash
@@ -72,6 +68,10 @@ python3 create_intent.py --intent full_path
 * ВК: https://vk.me/join/AJQ1d4B1FSp5TUCFT4WmQyFW
 
 Видео работы бота ВК:
+
+
+https://github.com/kaser137/VoicesRecognizeBot/assets/107580630/1a7f004c-2376-4a19-9cdd-9973f0e5b1c0
+
 
 
 
