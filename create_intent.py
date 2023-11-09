@@ -32,16 +32,15 @@ def create_intent(display_name, training_phrases_parts, message_texts, project_i
 @click.option('--intent', default='questions.json', help='full path to the json file with intents.')
 def main(intent):
     with open(intent, 'r') as file:
-        queries_json = file.read()
+        intent_json = file.read()
 
-    queries = json.loads(queries_json)
+    intents = json.loads(intent_json)
 
-    for key, value in queries.items():
-
+    for intent_name, intent_part in intents.items():
         create_intent(
-            display_name=key,
-            training_phrases_parts=value['questions'],
-            message_texts=[value['answer'],]
+            display_name=intent_name,
+            training_phrases_parts=intent_part['questions'],
+            message_texts=[intent_part['answer'], ]
         )
 
 
