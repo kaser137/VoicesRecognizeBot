@@ -3,40 +3,26 @@ import logging
 from environs import Env
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
-from google.cloud import dialogflow
 from google.api_core.exceptions import RetryError
+from google_dialogflow_api import detect_intent_texts
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+
+def start(update: Update, _):
+    update.message.reply_text('Здравствуйте')
+
+
+def answer(update: Update, _):
+    text = update.message.text
+    session_id = update.message.from_user.id
+    answer, _ = detect_intent_texts(project_id, session_id=session_id, text=text, language_code=language_code)
+    update.message.reply_text(answer)
 
 
 def main():
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                        level=logging.INFO)
-    env = Env()
-    env.read_env()
-    bot_token = env('TG_BOT_TOKEN')
-    tg_chat_id = env('TG_CHAT_ID')
-    project_id = env('DIALOGFLOW_PROJECT_ID')
-    language_code = env('LANGUAGE_CODE', 'ru')
-    bot = telegram.Bot(bot_token)
     try:
-        def detect_intent_texts(project_id=project_id, session_id='123456789', text='ока', language_code=language_code):
-            session_client = dialogflow.SessionsClient()
-            session = session_client.session_path(project_id, session_id)
-            text_input = dialogflow.TextInput(text=text, language_code=language_code)
-            query_input = dialogflow.QueryInput(text=text_input)
-            response = session_client.detect_intent(
-                request={"session": session, "query_input": query_input},
-            )
-            return response.query_result.fulfillment_text, response.query_result.intent.is_fallback
-
-        def start(update: Update, _):
-            update.message.reply_text('Здравствуйте')
-
-        def answer(update: Update, _):
-            text = update.message.text
-            session_id = update.message.from_user.id
-            answer, _ = detect_intent_texts(session_id=session_id, text=text)
-            update.message.reply_text(answer)
-
         updater = Updater(token=bot_token)
         dispatcher = updater.dispatcher
         start_handler = CommandHandler('start', start)
@@ -49,4 +35,12 @@ def main():
 
 
 if __name__ == "__main__":
+    env = Env()
+    env.read_env()
+    bot_token = env('TG_BOT_TOKEN')
+    tg_chat_id = env('TG_CHAT_ID')
+    project_id = env('DIALOGFLOW_PROJECT_ID')
+    language_code = env('LANGUAGE_CODE', 'ru')
+    bot = telegram.Bot(bot_token)
     main()
+
