@@ -5,10 +5,9 @@ import logging
 from environs import Env
 from vk_api.longpoll import VkLongPoll, VkEventType
 from google.api_core.exceptions import RetryError
-from google_dialogflow_api import detect_intent_texts
+from google_dialogflow_api import detect_intent_texts, TelegramLogsHandler
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logger = logging.getLogger('vk-bot')
 
 
 def reply(event, vk_api):
@@ -24,16 +23,6 @@ def reply(event, vk_api):
         )
 
 
-def main(vk_api):
-    try:
-        longpoll = VkLongPoll(vk_session)
-        for event in longpoll.listen():
-            if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-                reply(event, vk_api=vk_api)
-    except RetryError:
-        bot.send_message(tg_chat_id, 'while invoking dialogflow was raised exception RetryError')
-
-
 if __name__ == "__main__":
     env = Env()
     env.read_env()
@@ -43,6 +32,16 @@ if __name__ == "__main__":
     project_id = env('DIALOGFLOW_PROJECT_ID')
     language_code = env('LANGUAGE_CODE', 'ru')
     bot = telegram.Bot(bot_token)
+    logging.basicConfig(filename='logging.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logger.setLevel(logging.INFO)
+    logger.addHandler(TelegramLogsHandler(bot, tg_chat_id))
     vk_session = vk.VkApi(token=vk_token)
     vk_api = vk_session.get_api()
-    main(vk_api)
+    try:
+        longpoll = VkLongPoll(vk_session)
+        logger.info('vk_bot start polling')
+        for event in longpoll.listen():
+            if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                reply(event, vk_api=vk_api)
+    except RetryError:
+        bot.send_message(tg_chat_id, 'while invoking dialogflow was raised exception RetryError')
