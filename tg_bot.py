@@ -3,7 +3,6 @@ import logging
 from environs import Env
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
-from google.api_core.exceptions import RetryError
 from google_dialogflow_api import detect_intent_texts, TelegramLogsHandler
 
 logger = logging.getLogger('tg-bot')
@@ -52,5 +51,5 @@ def main():
         logger.error(err, exc_info=True)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
