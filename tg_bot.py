@@ -16,17 +16,15 @@ def start(update: Update, _):
 def answer(update: Update, _):
     text = update.message.text
     session_id = update.message.from_user.id
-    answer, _ = detect_intent_texts(project_id, session_id=session_id, text=text, language_code=language_code)
+    answer, _ = detect_intent_texts(session_id=session_id, text=text)
     update.message.reply_text(answer)
 
 
-if __name__ == "__main__":
+def main():
     env = Env()
     env.read_env()
     bot_token = env('TG_BOT_TOKEN')
     tg_chat_id = env('TG_CHAT_ID')
-    project_id = env('DIALOGFLOW_PROJECT_ID')
-    language_code = env('LANGUAGE_CODE', 'ru')
     bot = telegram.Bot(bot_token)
     logging.basicConfig(filename='logging.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger.setLevel(logging.INFO)
@@ -42,3 +40,7 @@ if __name__ == "__main__":
         logger.info('tg_bot start polling')
     except RetryError:
         bot.send_message(tg_chat_id, 'while invoking dialogflow was raised exception RetryError')
+
+
+if __name__ == "__main__":
+    main()

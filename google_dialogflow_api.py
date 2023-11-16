@@ -1,5 +1,6 @@
 import logging
 from google.cloud import dialogflow
+from environs import Env
 
 
 class TelegramLogsHandler(logging.Handler):
@@ -14,7 +15,11 @@ class TelegramLogsHandler(logging.Handler):
         self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
-def detect_intent_texts(project_id, session_id='123456789', text='ока', language_code='ru'):
+def detect_intent_texts(session_id='123456789', text='ока'):
+    env = Env()
+    env.read_env()
+    project_id = env('DIALOGFLOW_PROJECT_ID')
+    language_code = env('LANGUAGE_CODE', 'ru')
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
     text_input = dialogflow.TextInput(text=text, language_code=language_code)
