@@ -48,8 +48,8 @@ def main():
         dispatcher.add_handler(answer_handler)
         updater.start_polling()
         logger.info('tg_bot start polling')
-    except RetryError:
-        bot.send_message(tg_chat_id, 'while invoking dialogflow was raised exception RetryError')
+    except Exception as err:
+        logger.error(err, exc_info=True)
 
 
 if __name__ == "__main__":

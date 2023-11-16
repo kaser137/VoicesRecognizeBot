@@ -47,8 +47,8 @@ def main():
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 reply(event, vk_api, project_id, language_code)
-    except RetryError:
-        bot.send_message(tg_chat_id, 'while invoking dialogflow was raised exception RetryError')
+    except Exception as err:
+        logger.error(err, exc_info=True)
 
 
 if __name__ == "__main__":
