@@ -13,10 +13,10 @@ def start(update: Update, _):
     update.message.reply_text('Здравствуйте')
 
 
-def answer(update: Update, _):
+def answer(update: Update, _, project_id, language_code='ru'):
     text = update.message.text
     session_id = update.message.from_user.id
-    answer, _ = detect_intent_texts(session_id=session_id, text=text)
+    answer, _ = detect_intent_texts(project_id, session_id=session_id, text=text, language_code=language_code)
     update.message.reply_text(answer)
 
 
@@ -25,6 +25,8 @@ def main():
     env.read_env()
     bot_token = env('TG_BOT_TOKEN')
     tg_chat_id = env('TG_CHAT_ID')
+    project_id = env('DIALOGFLOW_PROJECT_ID')
+    language_code = env('LANGUAGE_CODE', 'ru')
     bot = telegram.Bot(bot_token)
     logging.basicConfig(filename='logging.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger.setLevel(logging.INFO)
@@ -33,7 +35,10 @@ def main():
     dispatcher = updater.dispatcher
     try:
         start_handler = CommandHandler('start', start)
-        answer_handler = MessageHandler(Filters.text & (~Filters.command), answer)
+        answer_handler = MessageHandler(
+            Filters.text & (~Filters.command),
+            callback=lambda update, _: answer(update, _, project_id, language_code=language_code)
+        )
         dispatcher.add_handler(start_handler)
         dispatcher.add_handler(answer_handler)
         updater.start_polling()

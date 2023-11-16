@@ -10,10 +10,15 @@ from google_dialogflow_api import detect_intent_texts, TelegramLogsHandler
 logger = logging.getLogger('vk-bot')
 
 
-def reply(event, vk_api):
+def reply(event, vk_api, project_id, language_code):
     text = event.text
     session_id = event.chat_id
-    message, is_fallback = detect_intent_texts(session_id=session_id, text=text)
+    message, is_fallback = detect_intent_texts(
+        project_id,
+        session_id=session_id,
+        text=text,
+        language_code=language_code
+    )
     if not is_fallback:
         vk_api.messages.send(
             chat_id=event.chat_id,
@@ -28,6 +33,8 @@ def main():
     bot_token = env('TG_BOT_TOKEN')
     tg_chat_id = env('TG_CHAT_ID')
     vk_token = env('VK_TOKEN')
+    project_id = env('DIALOGFLOW_PROJECT_ID')
+    language_code = env('LANGUAGE_CODE', 'ru')
     bot = telegram.Bot(bot_token)
     logging.basicConfig(filename='logging.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger.setLevel(logging.INFO)
@@ -39,7 +46,7 @@ def main():
         logger.info('vk_bot start polling')
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-                reply(event, vk_api=vk_api)
+                reply(event, vk_api, project_id, language_code)
     except RetryError:
         bot.send_message(tg_chat_id, 'while invoking dialogflow was raised exception RetryError')
 
