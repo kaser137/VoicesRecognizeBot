@@ -13,10 +13,15 @@ def start(update: Update, _):
     update.message.reply_text('Здравствуйте')
 
 
-def answer(update: Update, _, project_id, language_code='ru'):
+def answer(update: Update, _, project_id, language_code):
     text = update.message.text
     session_id = update.message.from_user.id
-    answer, _ = detect_intent_texts(project_id, session_id=session_id, text=text, language_code=language_code)
+    answer, _ = detect_intent_texts(
+        project_id,
+        session_id=session_id,
+        text=text,
+        language_code=language_code
+    )
     update.message.reply_text(answer)
 
 
@@ -37,7 +42,7 @@ def main():
         start_handler = CommandHandler('start', start)
         answer_handler = MessageHandler(
             Filters.text & (~Filters.command),
-            callback=lambda update, _: answer(update, _, project_id, language_code=language_code)
+            callback=lambda update, _: answer(update, _, project_id, language_code)
         )
         dispatcher.add_handler(start_handler)
         dispatcher.add_handler(answer_handler)
